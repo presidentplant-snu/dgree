@@ -1,0 +1,21 @@
+{
+    "name": "Devcontainer",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "cv-plotter-container",
+    "workspaceFolder": "/workspace",
+    
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.linting.enabled": true,
+                "python.formatting.provider": "black"
+            }
+        }
+    },
+    "remoteUser": "ubuntu"
+}

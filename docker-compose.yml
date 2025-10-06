@@ -1,0 +1,21 @@
+services:
+  cv-plotter-container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cv-plotter-dev # Name of the image built
+    container_name: cv-plotter-dev # Name of the container that runs
+    stdin_open: true # Equiv. to -i on docker run
+    tty: true # Equiv. to -t on docker run
+    network_mode: host # Expose all networking interfaces of the host (unsafe but convenient)
+    ipc: host # Expose all ipc of the host (unsafe)
+    privileged: true # 100% control of everything
+    environment:
+      - DISPLAY=${DISPLAY} # Tell which "X server" to connect to  
+      - LOCAL_USER_ID=${UID} # Local user/group id for gosu
+      - LOCAL_GROUP_ID=${GID}
+      - LOCAL_USERNAME=goyoungpot
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro # Mount .X11-unix folder (containes all the sockets for X displays)
+      - ./:/workspace/ # Mount current folder to /workspace/
+
