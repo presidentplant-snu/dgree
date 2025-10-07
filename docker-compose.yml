@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: cv-plotter-dev # Name of the image built
-    container_name: cv-plotter-dev # Name of the container that runs
+    image: dgree-dev # Name of the image built
+    container_name: dgree-dev # Name of the container that runs
     stdin_open: true # Equiv. to -i on docker run
     tty: true # Equiv. to -t on docker run
     network_mode: host # Expose all networking interfaces of the host (unsafe but convenient)
