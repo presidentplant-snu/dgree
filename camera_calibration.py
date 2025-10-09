@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from datetime import datetime
 
+
 # ===== 사용자 설정 =====
 # 체커보드 내부 코너 (가로, 세로)
 CHESSBOARD = (10, 7)
@@ -9,9 +10,8 @@ CHESSBOARD = (10, 7)
 SQUARE_SIZE = 25.0
 # 샘플 프레임 개수
 MIN_SAMPLES = 12
-# 저장 파일 경로
+# 파일 저장 경로
 SAVE_PATH = "camera_params.yml"
-# ======================
 
 def save_params(path, dist_coeffs, camera_matrix):
 
