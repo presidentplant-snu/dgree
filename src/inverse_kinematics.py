@@ -1,3 +1,5 @@
+import rclpy
+from rclpy.node import Node
 import numpy as np
 
 def inverse_kinematics(target_x, target_y):
@@ -13,8 +15,9 @@ def inverse_kinematics(target_x, target_y):
     #if elbow up position then negative
 
     alpha = np.arctan2(target_y, target_x)
-    cos_beta = (length1**2 + dist_sq - length2**2) / (2*length1*dist)
-    beta = np.arccos(cos_beta)
+    beta = np.arctan2(length2 * np.sin(theta2), length1 + length2 * np.cos(theta2))
+    #cos_beta = (length1**2 + dist_sq - length2**2) / (2*length1*dist)
+    #beta = np.arccos(cos_beta)
     theta1 = alpha - beta
     #if elbow up postion then alpha + beta
 
