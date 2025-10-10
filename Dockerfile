@@ -8,6 +8,8 @@ apt-get install -y gosu
 apt-get clean && rm -rf /var/lib/apt/lists/*
 EOF
 
+RUN apt-get update && apt-get install -y python3-serial
+
 # Add entrypoint script
 COPY entrypoint.sh  /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh

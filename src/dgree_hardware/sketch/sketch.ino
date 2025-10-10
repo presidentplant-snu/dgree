@@ -1,3 +1,5 @@
+#include <string.h>
+
 uint8_t ENA = 7;
 uint8_t IN1 = 6;
 uint8_t IN2 = 5;
@@ -9,6 +11,9 @@ uint8_t IN4 = 4;
 void motorWrite(int16_t a, int16_t b);
 
 void setup(){
+
+  Serial.begin(9600);
+
   for(uint8_t i =2; i<8; i++){
     pinMode(i, OUTPUT);
   }
@@ -43,6 +48,10 @@ void motorWrite(int16_t a, int16_t b){
 }
 
 
+int num1=0, num2=0;
 void loop(){
-  motorWrite(120,-100);
+  String msg = Serial.readStringUntil('\n');
+  sscanf(msg.c_str(), "%d,%d\n", &num1, &num2);
+  Serial.println(num1);
+  motorWrite(num1, num2);
 }

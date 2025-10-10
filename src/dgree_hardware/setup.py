@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'motor_driver = dgree_hardware.motor_driver:main'
         ],
     },
 )
