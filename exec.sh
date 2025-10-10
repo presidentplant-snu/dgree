@@ -1,1 +1,1 @@
-docker exec -it --user $UID:$GID cv-plotter-dev bash
+docker exec -it --user $UID:$GID dgree-dev bash
