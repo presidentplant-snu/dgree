@@ -41,7 +41,7 @@ class InverseKinematicsNode(Node):
 
         self.target_pub = self.create_publisher(
             Float32MultiArray,
-            '/joint/target_angles',
+            '/joints/target_angles',
             10
         )
 

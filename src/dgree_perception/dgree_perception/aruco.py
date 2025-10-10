@@ -80,7 +80,8 @@ class arucoDetectionNode(Node):
                             cv2.circle(frame, (x,y), 4, (0,0,255),-1)
 
                 center = sum/4
-                   
+                if ids[i] > 3:
+                    continue
                 self.marker_infos[ids[i],0] = center[0]
                 self.marker_infos[ids[i],1] = center[1]
                 

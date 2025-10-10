@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="dgree_control" exec="inverse_kinematics"/>
+  <node pkg="dgree_control" exec="pid"  />
+  <node pkg="dgree_hardware" exec="motor_driver"/>
+  <node pkg="dgree_perception" exec="marker_detector_node"/>
+</launch>

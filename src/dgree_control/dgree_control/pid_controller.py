@@ -56,15 +56,24 @@ class PIDControllerNode(Node):
         # TODO: Get parameters
         control_rate = 30
 
-        self.pid = PIDController(
-                kp = 1.0,
-                kd = 0.3,
-                ki = 0.2,
+        self.pid1 = PIDController(
+                kp = 0.3,
+                kd = 0.01,
+                ki = 0.05,
+                anti_windup=0.3,
+                sample_time= 1.0/control_rate
+                )
+        self.pid2 = PIDController(
+                kp = 0.2,
+                kd = 0.01,
+                ki = 0.01,
+                anti_windup=0.3,
                 sample_time= 1.0/control_rate
                 )
 
-        self.setpoint = np.zeros(2, dtype=np.float32)
-        self.current = np.zeros(2, dtype=np.float32)
+        self.setpoint = np.empty(2, dtype=np.float32)
+        self.setpoint[:]=np.nan
+        self.current = np.empty(2, dtype=np.float32)
         self.last_time = self.get_clock().now()
 
         self.setpoint_sub = self.create_subscription(
@@ -94,14 +103,20 @@ class PIDControllerNode(Node):
         self.current = np.array(msg.data)
 
     def control_loop(self):
+
+        if(np.isnan(self.setpoint[0])):
+            return
         current_time = self.get_clock().now()
         dt = (current_time - self.last_time).nanoseconds / 1e9
         self.last_time = current_time 
 
-        control_output = self.pid.update(self.setpoint, self.current, dt)
+        control_output = np.zeros(2,dtype=np.float32)
+
+        control_output[0] = self.pid1.update(self.setpoint[0], self.current[0], dt)
+        control_output[1] = self.pid2.update(self.setpoint[1], self.current[1], dt)
 
         control_msg = Float32MultiArray()
-        control_msg.data = control_output 
+        control_msg.data = np.array(control_output,dtype=np.float32)
         self.motor_pub.publish(control_msg)
 
 def main(args=None):
