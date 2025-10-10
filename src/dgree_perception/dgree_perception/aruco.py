@@ -11,7 +11,7 @@ import math
 
 
 
-do_imshow = False
+do_imshow = True
 
 
 class arucoDetectionNode(Node):
@@ -67,8 +67,10 @@ class arucoDetectionNode(Node):
             cv2.aruco.drawDetectedMarkers(frame, corners, ids)
 
             for i in range(len(ids)):
-                #marker의 중심 
-                sum = 0
+                #marker의 
+                # 중심 
+                sum = np.array([0.0,0.0])
+
                 for corner in corners[i]:
                     
                     if do_imshow:
@@ -98,21 +100,30 @@ class arucoDetectionNode(Node):
         p3 = self.marker_infos[3]
 
 
-        v1 = p0-p1
+        v1 = p1-p0
         v2 = p2-p1
-        v3 = p3-p1
+        v3 = p3-p2
 
         n1 = np.linalg.norm(v1)
         n2 = np.linalg.norm(v2)
         n3 = np.linalg.norm(v3)
 
+        ang1 = np.arctan2(v1[0],v1[1])
+        ang2 = np.arctan2(v2[0],v2[1])
+        ang3 = np.arctan2(v3[0],v3[1])
+
+        '''
         cos_ang1= np.clip(np.dot(v1,v2)/(n1*n2), -1.0,1.0)
         ang1 = math.degrees(math.acos(cos_ang1))
 
         cos_ang2 = np.clip(np.dot(v2,v3)/(n2*n3), -1.0,1.0)
         ang2 = math.degrees(math.acos(cos_ang2))
 
-        self.ang = np.array([ang1, ang2])
+        '''
+        def normalize(angle):
+            # Numpy version is faster
+            return np.arctan2(np.sin(angle),np.cos(angle))
+        self.ang = np.array([normalize(ang2-ang1), normalize(ang3-ang2)])
         
 
 
