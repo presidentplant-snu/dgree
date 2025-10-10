@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'dgree_control'
+package_name = 'dgree_test'
 
 setup(
     name=package_name,
@@ -14,7 +14,7 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='ubuntu',
-    maintainer_email='ubuntu@todo.todo',
+    maintainer_email='jaewonchung7@snu.ac.kr',
     description='TODO: Package description',
     license='TODO: License declaration',
     extras_require={
@@ -24,8 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'inverse_kinematics = dgree_control.inverse_kinematics:main',
-            "pid = dgree_control.pid_controller:main"
+            "pid_test = dgree_test.pid_test:main"
         ],
     },
 )
