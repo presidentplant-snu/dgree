@@ -45,15 +45,25 @@ class InverseKinematicsNode(Node):
             10
         )
 
-        self.inverse_kinematics(self.goal)
+        msg = Float32MultiArray()
+        msg.data = self.inverse_kinematics(self.goal)
+        self.goal_sub.publish(msg.data)
 
     def goal_callback(self, msg):
         self.goal = np.array(msg.data)
 
+
 def main(args=None):
     rclpy.init(args=args)
     node = InverseKinematicsNode()
-    rclpy.spin(node)
+
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
 
 if __name__=='__main__':
-    print(inverse_kinematics(200, 200))
+    main()
