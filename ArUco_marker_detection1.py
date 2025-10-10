@@ -27,9 +27,6 @@ def live_aruco_detection(camera_matrix):
             cv2.aruco.drawDetectedMarkers(frame, corners, ids)
 
             for i in range(len(ids)):
-               
-                
-
                 #marker의 중심 
                 corner = corners[i][0]
 

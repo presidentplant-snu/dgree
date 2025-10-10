@@ -23,7 +23,7 @@ setup(
         ],
     },
     entry_points={
-        'console_scripts': [
+        'console_scripts': [ 'marker_detector_node=dgree_perception.aruco:main'
         ],
     },
 )

@@ -4,7 +4,7 @@ import os
 dictionary = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_5X5_100)
 
 
-marker_ids = range(3)
+marker_ids = range(4)
 marker_size = 100
 output_dir = "marker_imgs"
 
