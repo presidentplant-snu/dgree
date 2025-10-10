@@ -54,7 +54,7 @@ class PIDControllerNode(Node):
         super().__init__('pid_controller_node')
 
         # TODO: Get parameters
-        control_rate = 100
+        control_rate = 30
 
         self.pid = PIDController(
                 kp = 1.0,
